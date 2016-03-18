@@ -76,6 +76,9 @@ const volatile fixedConfig1 fixedConfigs1 FIXEDCONF1 = {
 #elif CONFIG == SCAVENGER_ID
 		perCylinderVolume:  CYLINDER_VOLUME(399.25),
 		injectorFlow:       CC_PER_MINUTE(540),
+#elif CONFIG == MATTHIJS309T_ID
+		perCylinderVolume:  CYLINDER_VOLUME(499.54),
+		injectorFlow:       CC_PER_MINUTE(235),
 #else
 		perCylinderVolume:  CYLINDER_VOLUME(500),
 		injectorFlow:       CC_PER_MINUTE(550),
@@ -198,6 +201,14 @@ const volatile fixedConfig1 fixedConfigs1 FIXEDCONF1 = {
 		decoderEngineOffset:      ANGLE(128), // Hentai initial setup value, will change a bit
 		numberOfConfiguredOutputEvents:              8, // See two lines above
 		numberOfInjectionsPerEngineCycle:            2  // Semi-sequential, for now.
+
+#elif CONFIG == MATTHIJS309T_ID // Matthijs' 309 Turbo
+		anglesOfTDC: {ANGLE(0), ANGLE(180), ANGLE(0), ANGLE(180)},
+		outputEventPinNumbers:       	{0,1,2,3}, 	// Wasted spark, semi-sequential (TODO: check pinout DIY vs Jaguar)
+		schedulingConfigurationBits: 	{0,0,1,1}, 	// First two ignition, last two injection
+		decoderEngineOffset:      	ANGLE(247),	// 117 at first, 247 after measure (for now) (TODO: check with timing light)
+		numberOfConfiguredOutputEvents:          4, 	// See two lines above
+		numberOfInjectionsPerEngineCycle:        2  	// Semi-sequential
 
 #else // Nothing scheduled by default, no sensible default for all possible vehicle setups.
 		anglesOfTDC:                            {}, // Depends on cylinder count and other variables
